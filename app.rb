@@ -7,6 +7,7 @@ require 'json'
 require './environment'
 require 'thin'
 require 'rack/ssl'
+require 'faker'
 
 class DigitalOceanExample < Sinatra::Base
   use Rack::Session::Cookie
@@ -21,7 +22,7 @@ class DigitalOceanExample < Sinatra::Base
   end
 
   get '/auth/:provider/callback' do
-    hostname = (0...8).map { (65 + rand(26)).chr }.join.downcase.to_s
+    hostname = "vpn-" + Faker::HeyArnold.character.downcase.tr(" ", "_")
     user_data = HTTParty.get("https://raw.githubusercontent.com/jmarhee/dockvpn/master/provision.sh").body.to_s
 
     token = request.env['omniauth.auth'].to_hash['credentials']['token'].to_s
