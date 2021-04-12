@@ -1,4 +1,4 @@
-FROM ruby:2.2.4
+FROM ruby:2.7.3
 MAINTAINER Joseph D. Marhee <joseph@marhee.me>
 
 ADD app.rb /root/app.rb
